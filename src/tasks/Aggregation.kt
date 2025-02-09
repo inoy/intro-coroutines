@@ -3,7 +3,8 @@ package tasks
 import contributors.User
 
 /*
-TODO: Write aggregation code.
+https://kotlinlang.org/docs/coroutines-and-channels.html#task-1
+Task 1
 
  In the initial list each user is present several times, once for each
  repository he or she contributed to.
@@ -15,4 +16,6 @@ TODO: Write aggregation code.
  You can use 'Navigate | Test' menu action (note the shortcut) to navigate to the test.
 */
 fun List<User>.aggregate(): List<User> =
-    this
+    this.groupBy { it.login }
+        .map { (login, group) -> User(login, group.sumOf { it.contributions }) }
+        .sortedByDescending { it.contributions }
