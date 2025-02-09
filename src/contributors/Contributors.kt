@@ -97,6 +97,9 @@ interface Contributors : CoroutineScope {
 
             SUSPEND -> { // Using coroutines
                 launch {
+                    // The log can show you which coroutine the corresponding code is running on.
+                    // To enable it, open Run | Edit configurations and add the -Dkotlinx.coroutines.debug VM option
+                    // https://kotlinlang.org/docs/coroutines-and-channels.html#starting-a-new-coroutine:~:text=Dkotlinx.coroutines.debug
                     val users = loadContributorsSuspend(service, req)
                     updateResults(users, startTime)
                 }.setUpCancellation()
